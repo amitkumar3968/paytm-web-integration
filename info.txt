@@ -1,0 +1,186 @@
+Checksum Request :- 
+
+{"TXN_AMOUNT":"185","MID":"Delfin35304506470494","CALLBACK_URL":"http:\/\/35.154.11.105\/paytm\/verifyChecksum.php","ORDER_ID":"30858332","CHANNEL_ID":"WAP","INDUSTRY_TYPE_ID":"Retail109","WEBSITE":"Delfinitywap","CUST_ID":"864"}
+
+Checksum Response :- 
+
+ CHECKSUMHASH = "vCb4nnBENTZXpu2VBEab3Hcu/Vb5RFuQA8OccpT/7rtal/LYkxbeXfunyiIddiSJ1GM+00VPcgdkQxuJNUVRCNUqfmk3N1a9ZfXwEFvGgaw=";
+    "ORDER_ID" = "<null>";
+    "payt_STATUS" = 1;
+
+
+Paytm Request :- 
+
+ "CALLBACK_URL" = "http://35.154.11.105/paytm/verifyChecksum.php";
+    "CHANNEL_ID" = WAP;
+    CHECKSUMHASH = "Na4MQb+mdgqGCdtUa0iPAOhYkCHPUBEVXaYoYb3errlpWECYfMbyEcCO3KqkOi5OCwa0guv760vngsYn3y9eRl5B9Ark/IJACfGeEXOuw7Q=";
+    "CUST_ID" = 864;
+    "INDUSTRY_TYPE_ID" = Retail109;
+    MID = Delfin35304506470494;
+    "ORDER_ID" = 30858332;
+    "REQUEST_TYPE" = DEFAULT;
+    "TXN_AMOUNT" = 185;
+    WEBSITE = Delfinitywap;
+
+Response :- 
+
+{"ORDERID":"30858332","MID":"Delfin35304506470494","TXNAMOUNT":"185.00","CURRENCY":"INR","STATUS":"TXN_FAILURE","RESPCODE":"330","RESPMSG":"Invalid checksum","BANKTXNID":"","IS_CHECKSUM_VALID":"N"}
+
+
+Mobile Number	77777 77777
+Password	Paytm12345
+OTP
+
+Doesn’t require 2nd factor authentication
+	489871
+
+
+    heroku git:remote -a node-paytm-checksum
+
+
+
+Install the Heroku CLI
+
+Download and install the Heroku CLI.
+
+If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
+
+$ heroku login
+
+Create a new Git repository
+
+Initialize a git repository in a new or existing directory
+
+$ cd my-project/
+$ git init
+$ heroku git:remote -a node-paytm-checksum
+
+Deploy your application
+
+Commit your code to the repository and deploy it to Heroku using Git.
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+
+Existing Git repository
+
+For existing repositories, simply add the heroku remote
+
+$ heroku git:remote -a node-paytm-checksum
+
+------------------------------------------------------
+ 
+
+        -----------------------------------------------------
+        generate_checksum
+                    paramarray['MID']  
+					paramarray['ORDER_ID']  
+					paramarray['CUST_ID']  
+					paramarray['INDUSTRY_TYPE_ID']  
+					paramarray['CHANNEL_ID']  
+					paramarray['TXN_AMOUNT']  
+					paramarray['WEBSITE']  
+					paramarray['CALLBACK_URL']  
+					paramarray['EMAIL']  
+					paramarray['MOBILE_NO']  
+                    
+                    http://localhost:5000/generate_checksum
+                    MID:ppTtAL55993483278240
+                    TXN_AMOUNT:185.00
+                    CALLBACK_URL:http://localhost:5000/handleresponsefrominitxn
+                    ORDER_ID:1247
+                    CHANNEL_ID:WAP
+                    INDUSTRY_TYPE_ID:Retail
+                    WEBSITE:WEBSTAGING
+                    CUST_ID:3342
+                    EMAIL:abc@gmail.com
+                    MOBILE_NO:3443432432
+                     
+
+        verify_checksum
+        above + CHECKSUMHASH
+        http://localhost:5000/verify_checksum
+        CHECKSUMHASH:"4WdTl6FqVcGkmXtM8eRv65yYJzDeQVgrAn+3m9nPA+hocsK5g1xFd4X6RtrVd8Xas+1jlpgWs0kYhJyIcm0QKs/BU8eD5dWxWkkGX6dRnsY="
+        MID:ppTtAL55993483278240
+        TXN_AMOUNT:185.00
+        CALLBACK_URL:http://localhost:5000/handleresponsefrominitxn
+        ORDER_ID:1247
+        CHANNEL_ID:WAP
+        INDUSTRY_TYPE_ID:Retail
+        WEBSITE:WEBSTAGING
+        CUST_ID:3342
+        EMAIL:abc@gmail.com
+        MOBILE_NO:3443432432
+
+
+        initiatetransaction
+        MID
+        ORDER_ID
+        WEBSITE
+        CALLBACK_URL
+        TXN_AMOUNT
+        CUST_ID
+                http://localhost:5000/initiatetransaction
+                MID:ppTtAL55993483278240
+                TXN_AMOUNT:185.00
+                CALLBACK_URL:http://localhost:5000/handleresponsefrominitxn
+                ORDER_ID:1251
+                //CHANNEL_ID:WAP
+                //INDUSTRY_TYPE_ID:Retail
+                WEBSITE:WEBSTAGING
+                CUST_ID:3342
+                //EMAIL:abc@gmail.com
+                //MOBILE_NO:3443432432
+                //requestType:UNI_PAY
+
+        handleresponsefrominitxn
+
+
+FOR PROD--
+change ids in config file paytme config.
+prod url in router.js for initiatetransaction
+also change paytm keys in all the requests.
+always change order id or simply increment it.
+
+
+initiatetransaction from test page
+<html>
+    <head>
+       <title>Show Payment Page</title>
+       <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+       <meta content="utf-8" http-equiv="encoding">
+    </head>
+    <body>
+       <center>
+          <h1>Please do not refresh this page...</h1>
+       </center>
+       <form method="post" action="http://localhost:5000/initiatetransaction" name="paytm">
+          <table border="1">
+             <tbody>
+                <input type="hidden" name="MID" value="ppTtAL55993483278240">
+                <input type="hidden" name="ORDER_ID" value="1252">
+                <input type="hidden" name="TXN_AMOUNT" value="196">
+                <input type="hidden" name="CALLBACK_URL" value="http://localhost:5000/handleresponsefrominitxn">
+                <input type="hidden" name="WEBSITE" value="WEBSTAGING">
+                <input type="hidden" name="CUST_ID" value="3342">
+             </tbody>
+          </table>
+          <script type="text/javascript"> document.paytm.submit(); </script>
+       </form>
+    </body>
+ </html>
+ 
+
+ Steps to integrate Paytm in website-
+ 1. create testing keys from paytm
+ 2. add them in node js paytm config file.
+ 3. also add keys in all requests.
+ 4 . push node code to server.
+ 5. in this router js file --
+   we can 
+   generate_checksum
+   verify_checksum
+   initiatetransaction from web using provided test.html
+6. for prod - verify all keys in node code and all the requests.
+7. in initiatetransaction - don't forget to change url to prod .

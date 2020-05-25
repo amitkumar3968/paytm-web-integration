@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>Show Payment Page</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+
+<body>
+    <center>
+        <h1>Initiate Paytm transaction</h1>
+        <h2>plz change order id</h2>
+        <h3>Test credentials paytm - mobile no.- 7777777777 , otp - 489871</h3>
+    </center>
+    <form method="post" action="https://node-paytm-checksum.herokuapp.com/initiatetransaction" name="paytm">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>
+                        <label>MID</label>
+                        <input type="input" name="MID" value="ppTtAL55993483278240">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>ORDER_ID</label>
+                        <input type="input" name="ORDER_ID" value="1252">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>TXN_AMOUNT</label>
+                        <input type="input" name="TXN_AMOUNT" value="196">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <label>CALLBACK_URL</label>
+                        <input type="input" name="CALLBACK_URL" value="https://node-paytm-checksum.herokuapp.com/handleresponsefrominitxn">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>WEBSITE</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="input" name="WEBSITE" value="WEBSTAGING">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>CUST_ID</label>
+                        <input type="input" name="CUST_ID" value="3342">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <script type="text/javascript"> document.paytm.submit(); </script> -->
+    </form>
+    <button title="initite paytm transaction" onclick="document.paytm.submit();">Submit</button>
+
+</body>
+
+</html>
